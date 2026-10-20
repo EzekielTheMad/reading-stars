@@ -1,0 +1,56 @@
+{
+  "name": "reading-stars",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.14.0"
+  },
+  "scripts": {
+    "dev": "tsx server/index.ts",
+    "dev:ui": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "start": "node --import tsx server/index.ts",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "backup": "node --import tsx scripts/backup.ts",
+    "demo": "node --import tsx scripts/demo.ts",
+    "check:public": "node scripts/check-public-package.mjs",
+    "notices": "node scripts/dependency-notices.mjs",
+    "smoke": "node --import tsx scripts/smoke.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "fflate": "^0.8.2",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "openai": "^6.0.0",
+    "pdfjs-dist": "^6.2.108",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsx": "^4.20.6",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/supertest": "^6.0.3",
+    "@vitejs/plugin-react": "^5.0.4",
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.10"
+  },
+  "license": "MIT",
+  "description": "A self-hosted family reading comprehension and rewards app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EzekielTheMad/reading-stars.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EzekielTheMad/reading-stars/issues"
+  },
+  "homepage": "https://github.com/EzekielTheMad/reading-stars"
+}

@@ -1,0 +1,37 @@
+services:
+  reading-stars:
+    build: .
+    image: reading-stars:local
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${HOST_PORT:-8787}:8787"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      DATA_DIR: /app/data
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://127.0.0.1:8787}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      SETUP_TOKEN: ${SETUP_TOKEN:?Generate a private setup token first; see README}
+      READING_TIME_ZONE: ${READING_TIME_ZONE:-UTC}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5-mini}
+      OPENAI_SEARCH_MODEL: ${OPENAI_SEARCH_MODEL:-gpt-5.5}
+      AI_DAILY_LIMIT: ${AI_DAILY_LIMIT:-10}
+    volumes:
+      - reading-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,noexec,nosuid
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 768m
+    cpus: 1.0
+    stop_grace_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: "2"
+volumes:
+  reading-data:
